@@ -29,13 +29,15 @@ class LinkedList:
             while tmp.next is not None:
                 tmp = tmp.next
             tmp.next = node
+        # if node.data == 3:
+        #     node.next = self.head
 
     def contents(self):
 
         temp = self.head
 
         while temp is not None:
-            print temp.data
+            print(temp.data)
             temp = temp.next
 
     def addFirst(self, node):
@@ -51,14 +53,14 @@ class LinkedList:
     def removeFirst(self):
 
         if self.head is None:
-            print "Nothing to remove"
+            print("Nothing to remove")
         else:
             self.head = self.head.next
 
     def removeLast(self):
 
         if self.head is None:
-            print "Nothing to remove"
+            print("Nothing to remove")
         elif self.head.next is None:
             self.head = None
         else:
@@ -81,17 +83,12 @@ class LinkedList:
             tmp = tmp.next
         return tmp.data
 
-
-def main():
+if __name__ == '__main__':
     ll = LinkedList()
 
     ll.addLast(Node(1))
     ll.addLast(Node(2))
     ll.addLast(Node(3))
-
+    ll.contents()
     ll.removeLast()
     ll.contents()
-
-
-if __name__ == '__main__':
-    main()

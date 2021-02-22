@@ -107,7 +107,7 @@ class MyLinkedList(object):
         if index >= self.current_size or index < 0:
             return None
         else:
-            if index is 0:
+            if index == 0:
                 self.head = self.head.next
             else:
                 counter = 0
@@ -128,7 +128,7 @@ class MyLinkedList(object):
         temp = self.head
 
         while temp is not None:
-            print temp.val
+            print(temp.val)
             temp = temp.next
 
 # Your MyLinkedList object will be instantiated and called as such:
@@ -138,9 +138,9 @@ if __name__ == '__main__':
 
     obj = MyLinkedList()
 
-    # obj.addAtHead(1)
-    # obj.addAtHead(2)
-    # obj.addAtHead(3)
+    obj.addAtHead(1)
+    obj.addAtHead(2)
+    obj.addAtHead(3)
 
     obj.contents()
-    print obj.deleteAtIndex(2)
+    print(obj.deleteAtIndex(2))

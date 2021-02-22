@@ -16,5 +16,17 @@ class Queue:
         return self.queue[len(self.queue)-1]
 
     def contents(self):
-        print self.queue
+        print(self.queue)
 
+
+if __name__ == '__main__':
+    queue = Queue()
+    queue.enqueue(1)
+    queue.enqueue(2)
+    queue.enqueue(3)
+    queue.enqueue(4)
+
+    queue.dequeue()
+    queue.contents()
+    print(queue.front())
+    print(queue.rear())
