@@ -37,8 +37,9 @@ class LinkedList:
         temp = self.head
 
         while temp is not None:
-            print(temp.data)
+            print(temp.data, end="")
             temp = temp.next
+        print()
 
     def addFirst(self, node):
 
@@ -83,12 +84,14 @@ class LinkedList:
             tmp = tmp.next
         return tmp.data
 
+
 if __name__ == '__main__':
     ll = LinkedList()
 
     ll.addLast(Node(1))
     ll.addLast(Node(2))
     ll.addLast(Node(3))
+    ll.addLast(Node(4))
     ll.contents()
     ll.removeLast()
     ll.contents()

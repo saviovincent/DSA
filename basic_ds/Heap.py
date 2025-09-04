@@ -1,79 +1,75 @@
-# min heap
+# max heap
 
+"""
+go to new implementation in videos_revise. This is too complicated...
+"""
 class Heap:
 
     def __init__(self):
-        self.heap = []
+        self.arr = []
 
-    def get_parent(self, index):
-        return (index - 1) / 2
+    def add(self, el):
 
-    def get_children(self, index):
-        return (index * 2) + 1, (index * 2) + 2
-
-    def add(self, node):
-        self.heap.append(node)
-        self.trickleUp(len(self.heap) - 1)
-
-    def trickleUp(self, pos):
-        if pos is 0:
+        if len(self.arr) == 0:
+            self.arr.append(el)
             return
 
-        parent = self.get_parent(pos)
+        self.arr.append(el)
+        i = len(self.arr) - 1
 
-        if self.heap[parent] > self.heap[pos]:
-            self.swap(parent, pos)
-            self.trickleUp(parent)
-
-    def printHeap(self):
-        print("Heap Contents")
-        print(self.heap)
-
-    def swap(self, no1, no2):
-        temp = self.heap[no1]
-        self.heap[no1] = self.heap[no2]
-        self.heap[no2] = temp
+        # trickle up
+        while i >= 1:
+            if self.arr[i // 2] < self.arr[i]:
+                self.arr[i // 2], self.arr[i] = self.arr[i], self.arr[i // 2]  # swap with parent
+            i = i // 2
 
     def remove(self):
 
-        if self.heap:
-            self.heap[0] = self.heap[len(self.heap) - 1]
-            self.heap.pop(len(self.heap) - 1)
+        self.arr[0] = self.arr.pop()
+        i = 0
 
-            self.trickleDown(0)
+        # trickle down
+        while i < len(self.arr):
+            child_max, index = self.get_max_child(i)
+            if child_max is not None:
+                if child_max > self.arr[i]:
+                    self.arr[index], self.arr[i] = self.arr[i], self.arr[index]  # swap with max of both child
+            else:
+                return
+            i = index
 
-    def trickleDown(self, pos):
-
-        if (2*pos)+1 >= len(self.heap):
-            return
-
-        left, right = self.get_children(pos)
-
-        #handle 1 child case here
-
-        if right >= len(self.heap):
-            smallest = left
-        elif self.heap[left] < self.heap[right]:
-            smallest = left
-        else:
-            smallest = right
-
-        if self.heap[pos] > self.heap[left] or self.heap[pos] > self.heap[right]:
-            self.swap(pos, smallest)
-            self.trickleDown(smallest)
+    def get_max_child(self, i):
+        li = 2 * i + 1
+        ri = 2 * i + 2
+        lc = None
+        rc = None
+        if li < len(self.arr):
+            lc = self.arr[2 * i + 1]
+        if ri < len(self.arr):
+            rc = self.arr[2 * i + 2]
+        if lc is not None and rc is not None:
+            if lc > rc:
+                return lc, 2 * i + 1
+            return rc, 2 * i + 2
+        elif rc is not None and lc is None:
+            return rc, 2 * i + 2
+        elif lc is not None and rc is None:
+            return lc, 2 * i + 1
+        return None, -1
 
 
 if __name__ == '__main__':
-    heap = Heap()
-    heap.add(50)
-    heap.add(110)
-    heap.add(20)
-    heap.add(5)
-    heap.add(200)
-    heap.add(50)
-    heap.add(3)
+    hp = Heap()
+    hp.add(2)
+    hp.add(4)
+    hp.add(3)
+    hp.add(6)
+    hp.add(8)
 
-    heap.remove()
-    heap.remove()
-
-    heap.printHeap()
+    print(hp.arr)
+    hp.remove()
+    print(hp.arr)
+    hp.remove()
+    print(hp.arr)
+    hp.remove()
+    print(hp.arr)

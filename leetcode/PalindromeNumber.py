@@ -1,3 +1,6 @@
+import math
+
+
 class Solution(object):
     def isPalindrome(self, x):
         """
@@ -22,7 +25,7 @@ class Solution(object):
         #         j -= 1
         # return True
 
-        #more optimized just check half of the nos
+        # more optimized just check half of the nos
 
         # tmp = 0
         # pow = 0
@@ -31,7 +34,20 @@ class Solution(object):
         #     tmp += (x %10) *10
         #     x = x/10
 
+        if x < 0:
+            return -1 * self.isPalindrome(-1 * x)
+        tmp = x
+        val = 0
+        while tmp > 0:
+            rem = tmp % 10
+            val = val * 10 + rem
+            tmp = tmp // 10
+
+        if val > math.pow(2, 31) - 1:
+            return 0
+        return val
+
 
 if __name__ == '__main__':
     soln = Solution()
-    print soln.isPalindrome(-12344323)
+    print(soln.isPalindrome(1534236469))

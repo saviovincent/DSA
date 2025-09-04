@@ -27,7 +27,6 @@ class TwoWayMerge:
 
         return result
 
-    def merge_sort(self, ):
 
 if __name__ == '__main__':
     test = TwoWayMerge()
